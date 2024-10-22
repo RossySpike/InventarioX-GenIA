@@ -14,6 +14,7 @@ import java.util.regex.Pattern;
  */
 public class ListaMedicamentos {
   ArrayList<Medicamento> listaMedicamentos;
+  
 
   public ListaMedicamentos() {
     listaMedicamentos = new ArrayList<>();
@@ -114,5 +115,13 @@ public class ListaMedicamentos {
       System.out.println("Error! Ingrese un valor dentro del rango!");
     } while (true);
     return listaMedicamentos.get(datoInt);
+  }
+  public String [] getNombreMedicAsArray(){
+      ArrayList<String> listaNomb = new ArrayList<>();
+      
+      for (Medicamento med : listaMedicamentos){
+          listaNomb.add(med.getNombre());
+      }
+      return listaNomb.stream().toArray(String[]::new);
   }
 }

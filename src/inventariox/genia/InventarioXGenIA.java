@@ -3,7 +3,9 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Main.java to edit this template
  */
 package inventariox.genia;
-
+import inventariox.genia.controladora.Controladora;
+import inventariox.genia.vista.PantallaCarga;
+import inventariox.genia.vista.PantallaPrincipal;
 import java.util.ArrayList;
 
 /**
@@ -16,11 +18,9 @@ public class InventarioXGenIA {
    * @param args the command line arguments
    */
   public static void main(String[] args) {
-    ListaMedicamentos listaMed = new ListaMedicamentos();
-    String datoStr;
-    double total;
-    int opcion;
-    ArrayList<Venta> listaVenta = new ArrayList<>();
+          ListaMedicamentos listaMed = new ListaMedicamentos();
+
+          ArrayList<Venta> listaVenta = new ArrayList<>();
     listaMed.aggUltimo(new Medicamento("AB12345678", 10, 50, 12345, 1, 25.99, "Paracetamol", "12/2024"));
     listaMed.aggUltimo(new Medicamento("CD87654321", 20, 60, 12346, 0, 15.50, "Ibuprofeno", "11/2023"));
     listaMed.aggUltimo(new Medicamento("EF11223344", 5, 30, 12347, 2, 45.75, "Amoxicilina", "05/2025"));
@@ -41,6 +41,33 @@ public class InventarioXGenIA {
     listaMed.aggUltimo(new Medicamento("YZ11223344", 5, 15, 12357, 0, 55.75, "Oxandrolona", "10/2026"));
     listaMed.aggUltimo(new Medicamento("AB99887766", 8, 18, 12358, 1, 60.00, "Estanozolol", "12/2025"));
     listaMed.aggUltimo(new Medicamento("CD33445566", 12, 22, 12359, 2, 48.50, "Trembolona", "05/2024"));
+      /*
+    Runnable mRun = () ->{
+            PantallaCarga pCarga= new PantallaCarga();
+            pCarga.setVisible(true);
+
+
+            try {
+                Thread.sleep(500);
+            } catch (InterruptedException ex) {
+                Logger.getLogger(InventarioXGenIA.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            pCarga.dispose();
+            PantallaPrincipal pPal = new PantallaPrincipal();
+
+            pPal.setVisible(true);
+                };
+
+
+        Thread pSplash = new Thread(mRun);
+        pSplash.start();  
+    */
+    Controladora c = new Controladora(listaMed);
+    c.iniciarPantallaCarga(new PantallaCarga());
+    c.iniciarPantallaPrincipal(new PantallaPrincipal(listaMed),"InventarioX-GenIA/src/inventariox/genia/vista/pill.png");
+    String datoStr;
+    double total;
+    int opcion;
 
     boolean salir = false;
     do {

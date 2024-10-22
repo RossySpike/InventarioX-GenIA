@@ -24,7 +24,6 @@ public class Utility {
       System.out.println("Error! Por Favor Introduce un numero!");
       dato = Utility.pedirInt(mensaje);
     }
-    input.close();
 
     return dato;
   }
@@ -40,7 +39,6 @@ public class Utility {
       System.out.println("Error! Por Favor Introduce un numero!");
       dato = Utility.pedirInt(mensaje);
     }
-    input.close();
 
     return dato;
   }
@@ -53,7 +51,6 @@ public class Utility {
       System.out.println("Por favor ingresa un mensaje no vacio.");
       recibido = Utility.pedirStr(mensaje);
     }
-    input.close();
     return recibido;
 
   }

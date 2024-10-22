@@ -14,7 +14,6 @@ import java.util.regex.Pattern;
  */
 public class ListaMedicamentos {
   ArrayList<Medicamento> listaMedicamentos;
-  
 
   public ListaMedicamentos() {
     listaMedicamentos = new ArrayList<>();
@@ -116,12 +115,17 @@ public class ListaMedicamentos {
     } while (true);
     return listaMedicamentos.get(datoInt);
   }
-  public String [] getNombreMedicAsArray(){
-      ArrayList<String> listaNomb = new ArrayList<>();
-      
-      for (Medicamento med : listaMedicamentos){
-          listaNomb.add(med.getNombre());
-      }
-      return listaNomb.stream().toArray(String[]::new);
+
+  public String[] getNombreMedicAsArray() {
+    ArrayList<String> listaNomb = new ArrayList<>();
+
+    for (Medicamento med : listaMedicamentos) {
+      listaNomb.add(med.getNombre());
+    }
+    return listaNomb.stream().toArray(String[]::new);
+  }
+
+  public boolean vender(int indiceMed, int cantidad) {
+    return getIndice(indiceMed).venderUnidad(cantidad);
   }
 }

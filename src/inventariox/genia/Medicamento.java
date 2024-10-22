@@ -179,6 +179,43 @@ public class Medicamento {
     unidVendidas += 1;
   }
 
+  public boolean venderUnidad(int cantidad) {
+    if (!(Utility.validarRango(0, unidDispo, cantidad)) || !(unidDispo > 0))
+      return false;
+    unidDispo -= cantidad;
+    unidVendidas += cantidad;
+    return true;
+  }
+
+  public String getInformacion() {
+    String info = "************\nDatos del producto\nNombre: " + this.getNombre() +
+        "\nCosto: " + Double.toString(this.getCosto()) + "\nPrecio de venta: " +
+        Double.toString(this.getCostoVenta()) + "\nUnidades vendidas: " +
+        Integer.toString(this.getUnidVendidas()) + "\nUnidades disponibles: " +
+        Integer.toString(this.getUnidDispo()) + "\nFecha caducidad: " + this.getFechaVencimiento() +
+        "\nNumero de lote: " + Integer.toString(this.getLote()) + "\nVigencia: " + Integer.toString(this.getVigencia())
+        + " ";
+    switch (this.getVigencia()) {
+      case 0 -> {
+        info += " No disponible en el mercado";
+      }
+      case 1 -> {
+        info += "Disponible";
+      }
+      case 2 -> {
+        info += "Retirado";
+      }
+    }
+    info += "\n";
+
+    return info;
+
+  }
+
+  public boolean estaVigente() {
+    return vigencia == 1;
+  }
+
   public void mostrarInformacion() {
     System.out.println(
         "************\nDatos del producto\nNombre: " + this.getNombre() +
@@ -197,6 +234,7 @@ public class Medicamento {
       case 2 -> {
         System.out.println("Retirado");
       }
+
     }
   }
 

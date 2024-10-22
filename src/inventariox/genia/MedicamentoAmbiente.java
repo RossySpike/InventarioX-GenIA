@@ -83,4 +83,15 @@ public class MedicamentoAmbiente extends Medicamento {
     }
     System.out.println();
   }
+
+  @Override
+  public String getInformacion() {
+    String info = super.getInformacion();
+    info += "No se debe almacenar en: ";
+    for (String lugar : this.noAlmacenar) {
+      info += lugar + " ";
+    }
+    info += "\n";
+    return info;
+  }
 }

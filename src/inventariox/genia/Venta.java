@@ -12,16 +12,28 @@ public class Venta {
   // Proceso de pago?
   private String nombreProducto;
   private double costo;
+  int cantidad;
+
+    public int getCantidad() {
+        return cantidad;
+    }
+
+    public void setCantidad(int cantidad) {
+        this.cantidad = cantidad;
+    }
+
+    public Venta(String nombreProducto, double costo, int cantidad) {
+        this.nombreProducto = nombreProducto;
+        this.costo = costo;
+        this.cantidad = cantidad;
+    }
 
   public Venta() {
     nombreProducto = "";
     costo = 0;
   }
 
-  public Venta(String nombre, Double costo) {
-    nombreProducto = nombre;
-    this.costo = costo;
-  }
+
 
   public String getNombreProducto() {
     return nombreProducto;

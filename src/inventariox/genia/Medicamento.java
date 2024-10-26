@@ -4,8 +4,7 @@
  */
 package inventariox.genia;
 
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+
 
 /**
  *
@@ -118,43 +117,17 @@ public class Medicamento {
     this.fechaVencimiento = fechaVencimiento;
   }
 
-  public int getMesVencimiento() {
-    Pattern p = Pattern.compile("\\d{2}");
-    Matcher m = p.matcher(this.getFechaVencimiento());
-    m.find();
-    return Integer.parseInt(m.group());
 
-  }
 
-  public int getAnioVencimiento() {
-    Pattern p = Pattern.compile("\\d{4}");
-    Matcher m = p.matcher(this.getFechaVencimiento());
-    m.find();
-    return Integer.parseInt(m.group());
-
-  }
-
-  public Boolean validarCodigo(String codigo) {
-    Pattern p = Pattern.compile("^[A-Z]{2,2}+\\d{8,8}$");
-    Matcher m = p.matcher(codigo);
-    return m.find();
-
-  }
-
-  public Boolean validarFechaVencimiento(String fecha) {
-    Pattern p = Pattern.compile("^\\d{2,2}+/\\d{4,4}$");
-    Matcher m = p.matcher(fecha);
-    return m.find();
-  }
 
   public void precioAPagar(int porcentaje) {
     this.costoVenta = getCosto() + (getCosto() * porcentaje / 100);
   }
 
   public void determinarVencido() {
-    if (this.getAnioVencimiento() < Utility.getAnioActual())
+    if (Utility.getAnioVencimiento(fechaVencimiento) < Utility.getAnioActual())
       return;
-    if (this.getMesVencimiento() < Utility.getMesActual())
+    if (Utility.getMesVencimiento(fechaVencimiento) < Utility.getMesActual())
       return;
     System.out.println("***********\nProducto Vencido!\nFecha Vencimiento: " +
         this.getFechaVencimiento() + "\nCodigo: " +
@@ -239,7 +212,7 @@ public class Medicamento {
   }
 
   public void colocarOferta() {
-    if ((this.getMesVencimiento() - Utility.getMesActual()) >= 3)
+    if ((Utility.getMesVencimiento(fechaVencimiento) - Utility.getMesActual()) >= 3)
       this.precioAPagar(-30);
   }
 
@@ -249,7 +222,7 @@ public class Medicamento {
     int datoInt;
     do {
       input = Utility.pedirStr("Ingrese el codigo del medicamento (Ej: AB12345678)");
-      if (this.validarCodigo(input))
+      if (Utility.validarCodigo(input))
         break;
       System.out.println("Error! Ingrese el codigo con el formato correcto! (Ej: AB12345678)");
     } while (true);
@@ -265,16 +238,16 @@ public class Medicamento {
     do {
       input = Utility.pedirStr("Ingrese la fecha de vencimiento (mm/yyyy)");
 
-      if (!this.validarFechaVencimiento(input)) {
+      if (!Utility.validarFechaVencimiento(input)) {
         System.out.println("Error! Asegurese de utilizar un formato correcto! (mm/yyyy)");
         continue;
       }
       this.setFechaVencimiento(input);
-      if (!Utility.validarRango(1, 12, this.getMesVencimiento())) {
+      if (!Utility.validarRango(1, 12, Utility.getMesVencimiento(fechaVencimiento))) {
         System.out.println("Error! El valor del mes no puede ser menor que 1 ni mayor que 12!");
         continue;
       }
-      if (this.getAnioVencimiento() == 0) {
+      if (Utility.getAnioVencimiento(fechaVencimiento) == 0) {
         System.out.println("Error! El año no puede ser 0!");
       } else
         break;

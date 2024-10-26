@@ -6,6 +6,8 @@ package inventariox.genia;
 
 import java.text.DecimalFormat;
 import java.util.Scanner;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  *
@@ -80,5 +82,32 @@ public class Utility {
       return f.format(dato);
   }
   public static String traducirBoolean(boolean bool){ return bool ? "Si":"No";}
+  public static Boolean validarFechaVencimiento(String fecha) {
+    Pattern p = Pattern.compile("^\\d{2,2}+/\\d{4,4}$");
+    Matcher m = p.matcher(fecha);
+    return m.find();
+  }
+    public static int getMesVencimiento(String fecha) {
+    Pattern p = Pattern.compile("\\d{2}");
+    Matcher m = p.matcher(fecha);
+    m.find();
+    return Integer.parseInt(m.group());
+
+  }
+
+  public static int getAnioVencimiento(String fecha) {
+    Pattern p = Pattern.compile("\\d{4}");
+    Matcher m = p.matcher(fecha);
+    m.find();
+    return Integer.parseInt(m.group());
+
+  }
+
+  public static Boolean validarCodigo(String codigo) {
+    Pattern p = Pattern.compile("^[A-Z]{2,2}+\\d{8,8}$");
+    Matcher m = p.matcher(codigo);
+    return m.find();
+
+  }
 
 }

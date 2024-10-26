@@ -86,7 +86,7 @@ public class MedicamentoRefrigerado extends Medicamento {
 
   @Override
   public void colocarOferta() {
-    if ((this.getMesVencimiento() - Utility.getMesActual()) >= 3)
+    if ((Utility.getMesVencimiento(this.getFechaVencimiento()) - Utility.getMesActual()) >= 3)
       super.precioAPagar(-5);// 25%-30% (?jajaj
   }
 

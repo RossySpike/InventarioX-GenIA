@@ -17,6 +17,7 @@ public class PantallaPrincipal extends javax.swing.JFrame {
 
   public PantallaPrincipal(ListaMedicamentos lista) {
     c = new Controladora(lista);
+    
     initComponents();
 
   }
@@ -28,113 +29,128 @@ public class PantallaPrincipal extends javax.swing.JFrame {
    */
   @SuppressWarnings("unchecked")
   // <editor-fold defaultstate="collapsed" desc="Generated
-  // Code">//GEN-BEGIN:initComponents
-  private void initComponents() {
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
+    private void initComponents() {
 
-    panelPantPrincipal = new javax.swing.JPanel();
-    labelBienvenido = new javax.swing.JLabel();
-    labelSelecOpcion = new javax.swing.JLabel();
-    labelEntCliente = new javax.swing.JButton();
-    labelEntEmpleado = new javax.swing.JButton();
-    labelSalir = new javax.swing.JButton();
-    labelIcono = new javax.swing.JLabel();
+        panelPantPrincipal = new javax.swing.JPanel();
+        labelBienvenido = new javax.swing.JLabel();
+        labelEntCliente = new javax.swing.JButton();
+        labelEntEmpleado = new javax.swing.JButton();
+        labelSalir = new javax.swing.JButton();
+        labelIcono = new javax.swing.JLabel();
+        jPanel1 = new javax.swing.JPanel();
+        labelSelecOpcion = new javax.swing.JLabel();
 
-    setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-    setIconImage(new javax.swing.ImageIcon(getClass().getResource("/inventariox/genia/vista/pill.png")).getImage());
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setIconImage(new javax.swing.ImageIcon(getClass().getResource("/inventariox/genia/vista/pill.png")).getImage());
 
-    labelBienvenido.setFont(new java.awt.Font("Source Code Pro", 0, 48)); // NOI18N
-    labelBienvenido.setText("Bienvenido!");
+        panelPantPrincipal.setBackground(new java.awt.Color(153, 204, 255));
 
-    labelSelecOpcion.setFont(new java.awt.Font("Source Code Pro", 0, 24)); // NOI18N
-    labelSelecOpcion.setText("Seleccione una opcion");
+        labelBienvenido.setFont(new java.awt.Font("Source Code Pro", 0, 48)); // NOI18N
+        labelBienvenido.setText("~Bienvenido!~");
 
-    labelEntCliente.setText("Entrar como cliente");
-    labelEntCliente.addActionListener(new java.awt.event.ActionListener() {
-      public void actionPerformed(java.awt.event.ActionEvent evt) {
-        labelEntClienteActionPerformed(evt);
-      }
-    });
+        labelEntCliente.setText("Entrar como cliente");
+        labelEntCliente.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        labelEntCliente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                labelEntClienteActionPerformed(evt);
+            }
+        });
 
-    labelEntEmpleado.setText("Entrar como empleado");
-    labelEntEmpleado.addActionListener(new java.awt.event.ActionListener() {
-      public void actionPerformed(java.awt.event.ActionEvent evt) {
-        labelEntEmpleadoActionPerformed(evt);
-      }
-    });
+        labelEntEmpleado.setText("Entrar como empleado");
+        labelEntEmpleado.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        labelEntEmpleado.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                labelEntEmpleadoActionPerformed(evt);
+            }
+        });
 
-    labelSalir.setText("Salir :c");
-    labelSalir.addActionListener(new java.awt.event.ActionListener() {
-      public void actionPerformed(java.awt.event.ActionEvent evt) {
-        labelSalirActionPerformed(evt);
-      }
-    });
+        labelSalir.setText("Salir :c");
+        labelSalir.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        labelSalir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                labelSalirActionPerformed(evt);
+            }
+        });
 
-    labelIcono.setIcon(new javax.swing.ImageIcon(getClass().getResource("/inventariox/genia/vista/pill.png"))); // NOI18N
+        labelIcono.setIcon(new javax.swing.ImageIcon(getClass().getResource("/inventariox/genia/vista/pill.png"))); // NOI18N
 
-    javax.swing.GroupLayout panelPantPrincipalLayout = new javax.swing.GroupLayout(panelPantPrincipal);
-    panelPantPrincipal.setLayout(panelPantPrincipalLayout);
-    panelPantPrincipalLayout.setHorizontalGroup(
-        panelPantPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+
+        labelSelecOpcion.setBackground(new java.awt.Color(255, 255, 255));
+        labelSelecOpcion.setFont(new java.awt.Font("Source Code Pro", 0, 24)); // NOI18N
+        labelSelecOpcion.setText("Seleccione una opcion");
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(labelSelecOpcion, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(labelSelecOpcion, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+
+        javax.swing.GroupLayout panelPantPrincipalLayout = new javax.swing.GroupLayout(panelPantPrincipal);
+        panelPantPrincipal.setLayout(panelPantPrincipalLayout);
+        panelPantPrincipalLayout.setHorizontalGroup(
+            panelPantPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelPantPrincipalLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(panelPantPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(labelSelecOpcion, javax.swing.GroupLayout.DEFAULT_SIZE,
-                        javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(panelPantPrincipalLayout.createSequentialGroup()
-                        .addGap(53, 53, 53)
-                        .addGroup(
-                            panelPantPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(labelEntEmpleado, javax.swing.GroupLayout.DEFAULT_SIZE,
-                                    javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(labelEntCliente, javax.swing.GroupLayout.DEFAULT_SIZE,
-                                    javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(labelSalir, javax.swing.GroupLayout.Alignment.TRAILING,
-                                    javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE,
-                                    Short.MAX_VALUE))
-                        .addGap(51, 51, 51)))
+                    .addComponent(labelEntEmpleado, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(labelEntCliente, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(labelSalir, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(labelIcono, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE,
-                    Short.MAX_VALUE)
-                .addGap(45, 45, 45))
+                .addComponent(labelIcono, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(15, 15, 15))
             .addGroup(panelPantPrincipalLayout.createSequentialGroup()
-                .addGap(119, 119, 119)
+                .addGap(100, 100, 100)
                 .addComponent(labelBienvenido)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)));
-    panelPantPrincipalLayout.setVerticalGroup(
-        panelPantPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        panelPantPrincipalLayout.setVerticalGroup(
+            panelPantPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelPantPrincipalLayout.createSequentialGroup()
-                .addGap(9, 9, 9)
-                .addComponent(labelBienvenido, javax.swing.GroupLayout.DEFAULT_SIZE, 67, Short.MAX_VALUE)
+                .addContainerGap()
+                .addComponent(labelBienvenido, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(panelPantPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panelPantPrincipalLayout.createSequentialGroup()
-                        .addGap(9, 9, 9)
-                        .addComponent(labelSelecOpcion, javax.swing.GroupLayout.DEFAULT_SIZE, 57, Short.MAX_VALUE)
+                        .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGap(18, 18, 18)
-                        .addComponent(labelEntCliente, javax.swing.GroupLayout.DEFAULT_SIZE, 50, Short.MAX_VALUE)
+                        .addComponent(labelEntCliente, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(labelEntEmpleado, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGap(18, 18, 18)
-                        .addComponent(labelEntEmpleado, javax.swing.GroupLayout.DEFAULT_SIZE, 50, Short.MAX_VALUE)
-                        .addGap(18, 18, 18)
-                        .addComponent(labelSalir, javax.swing.GroupLayout.DEFAULT_SIZE, 51, Short.MAX_VALUE)
-                        .addGap(12, 12, 12))
+                        .addComponent(labelSalir, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(30, 30, 30))
                     .addGroup(panelPantPrincipalLayout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addComponent(labelIcono, javax.swing.GroupLayout.DEFAULT_SIZE,
-                            javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addContainerGap()))));
+                        .addComponent(labelIcono, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(15, 15, 15))))
+        );
 
-    javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-    getContentPane().setLayout(layout);
-    layout.setHorizontalGroup(
-        layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(panelPantPrincipal, javax.swing.GroupLayout.PREFERRED_SIZE, 567,
-                javax.swing.GroupLayout.PREFERRED_SIZE));
-    layout.setVerticalGroup(
-        layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(panelPantPrincipal, javax.swing.GroupLayout.PREFERRED_SIZE,
-                javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE));
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(panelPantPrincipal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(panelPantPrincipal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
 
-    pack();
-  }// </editor-fold>//GEN-END:initComponents
+        pack();
+    }// </editor-fold>//GEN-END:initComponents
 
   private void labelEntClienteActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_labelEntClienteActionPerformed
     // TODO add your handling code here:
@@ -144,6 +160,8 @@ public class PantallaPrincipal extends javax.swing.JFrame {
 
   private void labelEntEmpleadoActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_labelEntEmpleadoActionPerformed
     // TODO add your handling code here:
+    c.iniciarPantallaEmpleado(new PantallaEmpleado(c.getLista()));
+    dispose();
 
   }// GEN-LAST:event_labelEntEmpleadoActionPerformed
 
@@ -152,13 +170,14 @@ public class PantallaPrincipal extends javax.swing.JFrame {
     c.cerrarPrograma();
   }// GEN-LAST:event_labelSalirActionPerformed
 
-  // Variables declaration - do not modify//GEN-BEGIN:variables
-  private javax.swing.JLabel labelBienvenido;
-  private javax.swing.JButton labelEntCliente;
-  private javax.swing.JButton labelEntEmpleado;
-  private javax.swing.JLabel labelIcono;
-  private javax.swing.JButton labelSalir;
-  private javax.swing.JLabel labelSelecOpcion;
-  private javax.swing.JPanel panelPantPrincipal;
-  // End of variables declaration//GEN-END:variables
+    // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JLabel labelBienvenido;
+    private javax.swing.JButton labelEntCliente;
+    private javax.swing.JButton labelEntEmpleado;
+    private javax.swing.JLabel labelIcono;
+    private javax.swing.JButton labelSalir;
+    private javax.swing.JLabel labelSelecOpcion;
+    private javax.swing.JPanel panelPantPrincipal;
+    // End of variables declaration//GEN-END:variables
 }

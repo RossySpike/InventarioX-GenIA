@@ -119,7 +119,7 @@ public class MedicamentoRefrigerado extends Medicamento {
     String info = super.getInformacion();
     int puntos = this.calcularPuntajeRefrigeracion();
     info += "Tiempo sin refrigeracion: " + Double.toString(this.getTiempSinRefri())
-        + "h\nCertificado de cadena de frio: " + Boolean.toString(this.getCertifCadenaFrio()) + "\nEstado: ";
+        + "h\nCertificado de cadena de frio: " + Utility.traducirBoolean(getCertifCadenaFrio()) + "\nEstado: ";
     if (puntos == 100)
       info += "Excelente.";
     if ((puntos < 100) && puntos > 85)

@@ -6,7 +6,10 @@ package inventariox.genia.controladora;
 
 import inventariox.genia.InventarioXGenIA;
 import inventariox.genia.ListaMedicamentos;
+import inventariox.genia.Utility;
+import inventariox.genia.Venta;
 import inventariox.genia.vista.PantallaCliente;
+import inventariox.genia.vista.PantallaEmpleado;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.ImageIcon;
@@ -15,19 +18,26 @@ import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JTextArea;
+import java.util.ArrayList;
+import javax.swing.JLabel;
+import javax.swing.JRadioButton;
+import javax.swing.JTextField;
+
 
 /**
  *
  * @author honey
  */
 public class Controladora {
-  ListaMedicamentos lista;
+  private ListaMedicamentos lista;
+  private ArrayList<Venta> listaVenta;
 
   public Controladora() {
   }
 
   public Controladora(ListaMedicamentos lista) {
     this.lista = lista;
+    listaVenta = new ArrayList<>();
   }
 
   public void iniciaVentana(JFrame wd) {
@@ -92,9 +102,19 @@ public class Controladora {
     wd.setVisible(true);
 
   }
+  public void iniciarPantallaEmpleado(PantallaEmpleado wd) {
+    iniciaVentana(wd);
+    agregarNombMed(wd.getjComboBox1());
+
+    wd.setVisible(true);
+  
+  }
 
   public boolean comprar(int indiceMed, int cantidad) {
-    return lista.vender(indiceMed, cantidad);
+    if (!lista.vender(indiceMed, cantidad))
+        return false;
+    registrarVenta(lista.getIndice(indiceMed).getNombre(),lista.getIndice(indiceMed).getCostoVenta(),cantidad);
+    return true;
   }
 
   public ListaMedicamentos getLista() {
@@ -115,11 +135,101 @@ public class Controladora {
   public void mostrarInfo(JTextArea dest, int indiceMed) {
     dest.setText(lista.getIndice(indiceMed).getInformacion());
   }
+  public void mostrarInfo(JTextArea dest, Venta vent){
+      String txt= "************";
+      double costoTotal=0;
+      for (Venta venta : listaVenta){
+          txt+="\n"+venta.mostrarDatos()+"\n************";
+          costoTotal+=venta.getCosto();
+      }
+      dest.setText(txt+"\nCosto Total: "+Utility.getSolo2Decimales(costoTotal));
+  }
   /*
    * 
    * for (String i: listaMed.getNombreMedicAsArray()){
    * System.out.println(i);
    * }
    */
+  
+  public void ocultarOpcMedRefri(JRadioButton btnCertificado,JLabel tempMax, JLabel tempMin,JTextField txtMin,
+    JLabel lblTmpSinRefri, JTextField txtTmpSinRefri, JTextField txtTmpAbrir,JTextField txtTempMax, JLabel tmpAbrir){
+      btnCertificado.setVisible(false);
+      tempMax.setVisible(false);
+      tempMin.setVisible(false);
+      txtMin.setVisible(false);
+      lblTmpSinRefri.setVisible(false);
+      txtTmpSinRefri.setVisible(false);
+      txtTmpAbrir.setVisible(false);
+      tmpAbrir.setVisible(false);
+      txtTempMax.setVisible(false);
 
+      
+      
+  }
+  public void mostrarOpcMedRefri(JRadioButton btnCertificado,JLabel tempMax, JLabel tempMin,JTextField txtMin,
+    JLabel lblTmpSinRefri, JTextField txtTmpSinRefri, JTextField txtTmpAbrir, JTextField txtTempMax, JLabel tmpAbrir){
+      btnCertificado.setVisible(true);
+      tempMax.setVisible(true);
+      tempMin.setVisible(true);
+      txtMin.setVisible(true);
+      lblTmpSinRefri.setVisible(true);
+      txtTmpSinRefri.setVisible(true);
+      txtTmpAbrir.setVisible(true);
+      tmpAbrir.setVisible(true);
+      txtTempMax.setVisible(true);
+      
+      
+  }
+  public void ocultarOpcMedNoRefri(JLabel lbl, JTextField txtArea){
+      lbl.setVisible(false);
+      txtArea.setVisible(false);
+  }
+  public void mostrarOpcMedNoRefri(JLabel lbl, JTextField txtArea){
+      lbl.setVisible(true);
+      txtArea.setVisible(true);      
+  }
+  public void ocultarOpcTipoMed(JRadioButton btnCertificado,JLabel tempMax, JLabel tempMin,JTextField txtMin,
+    JLabel lblTmpSinRefri, JTextField txtTmpSinRefri, JTextField txtTmpAbrir, JTextField txtTempMax, JLabel tmpAbrir,
+    JLabel lbl, JTextField txtArea){
+      ocultarOpcMedRefri(btnCertificado, tempMax,  tempMin, txtMin,
+     lblTmpSinRefri,  txtTmpSinRefri,  txtTmpAbrir, txtTempMax,  tmpAbrir);
+      ocultarOpcMedNoRefri(lbl, txtArea);
+      
+  }
+  public void ocultarOferta(JTextField txtArea){
+      txtArea.setVisible(false);
+  }
+  public void mostrarOferta(JTextField txtArea){
+      txtArea.setVisible(true);      
+  }
+  public int buscarVentaPorNombre(String nombre){
+      for (int i = 0; i<listaVenta.size(); i++){
+          if (listaVenta.get(i).getNombreProducto().equals(nombre))
+              return i;
+      }
+      return -1;
+  }
+  public Venta obtVentaPorIndiceListaMed(int indice){
+      return listaVenta.get(buscarVentaPorNombre(lista.getIndice(indice).getNombre()));
+  }
+  
+  public void addVenta(String nombre, double costo, int cantidad){
+      listaVenta.add(new Venta(nombre,costo*cantidad,cantidad));
+  }
+  
+  public void registrarVenta(String nombre, double costo, int cantidad){
+      int pos;
+      if(listaVenta.isEmpty()){
+          addVenta(nombre,costo,cantidad);
+          }
+      else if ((pos = buscarVentaPorNombre(nombre))>-1){
+          listaVenta.get(pos).sumarCantidad(cantidad);
+          listaVenta.get(pos).sumarCosto(cantidad*costo);
+      }
+      else
+          addVenta(nombre,costo,cantidad);
+  }
+  public boolean medEstaVigente(int index){return lista.getIndice(index).estaVigente();}
+
+    
 }

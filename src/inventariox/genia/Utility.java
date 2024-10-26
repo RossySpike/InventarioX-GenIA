@@ -4,6 +4,7 @@
  */
 package inventariox.genia;
 
+import java.text.DecimalFormat;
 import java.util.Scanner;
 
 /**
@@ -74,4 +75,10 @@ public class Utility {
   public static int getMesActual() {
     return java.time.LocalDate.now().getMonthValue();
   }
+  public static String getSolo2Decimales(double dato){
+      DecimalFormat f = new DecimalFormat("#.##");
+      return f.format(dato);
+  }
+  public static String traducirBoolean(boolean bool){ return bool ? "Si":"No";}
+
 }

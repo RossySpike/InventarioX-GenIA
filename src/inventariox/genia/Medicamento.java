@@ -194,7 +194,7 @@ public class Medicamento {
         Integer.toString(this.getUnidVendidas()) + "\nUnidades disponibles: " +
         Integer.toString(this.getUnidDispo()) + "\nFecha caducidad: " + this.getFechaVencimiento() +
         "\nNumero de lote: " + Integer.toString(this.getLote()) + "\nVigencia: " + Integer.toString(this.getVigencia())
-        + " ";
+        + "\n";
     switch (this.getVigencia()) {
       case 0 -> {
         info += " No disponible en el mercado";
@@ -220,10 +220,10 @@ public class Medicamento {
     System.out.println(
         "************\nDatos del producto\nNombre: " + this.getNombre() +
             "\nCosto: " + this.getCosto() + "\nPrecio de venta: " +
-            this.getCostoVenta() + "\nUnidades vendidas: " +
+            Utility.getSolo2Decimales(this.getCostoVenta()) + "\nUnidades vendidas: " +
             this.getUnidVendidas() + "\nUnidades disponibles: " +
             this.getUnidDispo() + "\nFecha caducidad: " + this.getFechaVencimiento() +
-            "\nNumero de lote: " + this.getLote() + "\nVigencia: " + this.getVigencia());
+            "\nNumero de lote: " + this.getLote() + "\nVigencia: " + this.getVigencia()+"\n");
     switch (this.getVigencia()) {
       case 0 -> {
         System.out.println("No disponible en el mercado");

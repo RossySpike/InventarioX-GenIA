@@ -4,6 +4,8 @@
  */
 package inventariox.genia;
 
+import java.text.DecimalFormat;
+
 /**
  *
  * @author honey
@@ -51,8 +53,9 @@ public class Venta {
     this.costo = costo;
   }
 
-  public void mostrarDatos() {
-    System.out.println(
-        "\nDatos del producto\nNombre del Producto: " + this.getNombreProducto() + "\nCosto; " + this.getCosto());
+  public void sumarCosto(double costo){setCosto(costo+getCosto());}
+  public void sumarCantidad(int cant){setCantidad(getCantidad()+cant);}
+  public String mostrarDatos() {
+    return "Producto: " + this.getNombreProducto() + "\nCosto: " + Utility.getSolo2Decimales(getCosto())+"\nCantidad: "+getCantidad();
   }
 }

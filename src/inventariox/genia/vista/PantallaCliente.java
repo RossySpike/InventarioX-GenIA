@@ -269,9 +269,9 @@ public class PantallaCliente extends javax.swing.JFrame {
   private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jButton1ActionPerformed
     // TODO add your handling code here:
     if (!c.verificarEstado(jComboBox1.getSelectedIndex())) {
-      c.errorCompra(jDialog1, "El producto seleccionado no se encuentra vigente");
+      c.ventanaError( "El producto seleccionado no se encuentra vigente");
     } else if (!c.comprar(jComboBox1.getSelectedIndex(), jComboBox2.getSelectedIndex() + 1)) {
-      c.errorCompra(jDialog1, "Compra fallida, no hay suficientes unidades para esta transaccion");
+      c.ventanaError( "Compra fallida, no hay suficientes unidades para esta transaccion");
     }
     else{
       c.mostrarInfo(jTextArea1, jComboBox1.getSelectedIndex());

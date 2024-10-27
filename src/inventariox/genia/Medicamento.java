@@ -120,7 +120,7 @@ public class Medicamento {
 
 
 
-  public void precioAPagar(int porcentaje) {
+  public void precioAPagar(double porcentaje) {
     this.costoVenta = getCosto() + (getCosto() * porcentaje / 100);
   }
 
@@ -214,6 +214,9 @@ public class Medicamento {
   public void colocarOferta() {
     if ((Utility.getMesVencimiento(fechaVencimiento) - Utility.getMesActual()) >= 3)
       this.precioAPagar(-30);
+  }
+  public void colocarOferta(Double oferta) {
+    this.precioAPagar(oferta);
   }
 
   public void leerDatos() {

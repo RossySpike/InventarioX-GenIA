@@ -5,6 +5,7 @@
 package inventariox.genia;
 
 import java.text.DecimalFormat;
+import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -77,17 +78,23 @@ public class Utility {
   public static int getMesActual() {
     return java.time.LocalDate.now().getMonthValue();
   }
-  public static String getSolo2Decimales(double dato){
-      DecimalFormat f = new DecimalFormat("#.##");
-      return f.format(dato);
+
+  public static String getSolo2Decimales(double dato) {
+    DecimalFormat f = new DecimalFormat("#.##");
+    return f.format(dato);
   }
-  public static String traducirBoolean(boolean bool){ return bool ? "Si":"No";}
+
+  public static String traducirBoolean(boolean bool) {
+    return bool ? "Si" : "No";
+  }
+
   public static Boolean validarFechaVencimiento(String fecha) {
     Pattern p = Pattern.compile("^\\d{2,2}+/\\d{4,4}$");
     Matcher m = p.matcher(fecha);
     return m.find();
   }
-    public static int getMesVencimiento(String fecha) {
+
+  public static int getMesVencimiento(String fecha) {
     Pattern p = Pattern.compile("\\d{2}");
     Matcher m = p.matcher(fecha);
     m.find();
@@ -102,6 +109,54 @@ public class Utility {
     return Integer.parseInt(m.group());
 
   }
+
+  public static Boolean validarNatural(String fecha) {
+    Pattern p = Pattern.compile("^\\d{1,8}$");// Sirve para tanto validar naturales y naturales muy grandes
+    Matcher m = p.matcher(fecha);
+    return m.find();
+  }
+
+  public static Boolean validarEntero(String fecha) {
+    Pattern p = Pattern.compile("^-?\\d{1,8}$");// Sirve para tanto validar enteros y enteros muy grandes
+    Matcher m = p.matcher(fecha);
+    return m.find();
+  }
+
+  public static Boolean validarDouble(String dato) {
+
+    Pattern p = Pattern.compile("^-?\\d{1,5}.?\\d{0,3}$");// positivos y negativos,
+    Matcher m = p.matcher(dato);
+    return m.find();
+  }
+
+  public static Boolean validarDoublePositivo(String dato) {
+
+    Pattern p = Pattern.compile("^\\d{1,5}.?\\d{0,3}$");// positivos y negativos,
+    Matcher m = p.matcher(dato);
+    return m.find();
+  }
+
+  public static Boolean validarAlmacenamiento(String dato) {
+    Pattern p = Pattern.compile("(?:\\b[\\w\\s]+\\b,\\s*){2,}\\b[\\w\\s]+\\b");// agarra al menos 3 palabras separadas
+                                                                               // por coma y la ultima sin coma
+    Matcher m = p.matcher(dato);
+    
+    return m.find();//
+  }
+
+  public static ArrayList<String> getLugares(String dato) {
+    // Dividir la cadena en partes utilizando la coma como delimitador
+    String[] partes = dato.split(",\\s*");
+    ArrayList<String> lugares = new ArrayList<>();
+
+    // Agregar cada parte a la lista, eliminando espacios en blanco adicionales
+    for (String parte : partes) {
+        lugares.add(parte.trim());
+    }
+
+    return lugares;
+    }
+
 
   public static Boolean validarCodigo(String codigo) {
     Pattern p = Pattern.compile("^[A-Z]{2,2}+\\d{8,8}$");

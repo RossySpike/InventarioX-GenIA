@@ -23,6 +23,12 @@ public class MedicamentoAmbiente extends Medicamento {
     super(codigo, unidVendidas, unidDispo, lote, vigencia, costoCompra, nombre, fechaVencimiento);
     this.noAlmacenar.addAll(Arrays.asList(lugarAlmacenamiento));
   }
+  public MedicamentoAmbiente(String codigo, int unidVendidas, int unidDispo, int lote, int vigencia, double costoCompra,
+      String nombre, String fechaVencimiento, ArrayList<String> lugarAlmacenamiento) {
+    super(codigo, unidVendidas, unidDispo, lote, vigencia, costoCompra, nombre, fechaVencimiento);
+    this.noAlmacenar = lugarAlmacenamiento;
+  }
+
 
   public ArrayList<String> getNoAlmacenar() {
     return noAlmacenar;

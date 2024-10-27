@@ -6,6 +6,7 @@ package inventariox.genia.controladora;
 
 import inventariox.genia.InventarioXGenIA;
 import inventariox.genia.ListaMedicamentos;
+import inventariox.genia.MedicamentoAmbiente;
 import inventariox.genia.MedicamentoRefrigerado;
 import inventariox.genia.Utility;
 import inventariox.genia.Venta;
@@ -123,12 +124,19 @@ public class Controladora {
   public ListaMedicamentos getLista() {
     return this.lista;
   }
-
-  public void errorCompra(JDialog dialog, String errTxt) {
+    public void raiseWarning(String txt, String titulo, ImageIcon icon, int tipoMensaje){
+        JFrame frame = new JFrame();
+        frame.setIconImage(icon.getImage());
+        JOptionPane.showMessageDialog(frame, txt, titulo,tipoMensaje);
+    }
+  public void ventanaError( String errTxt) {
     ImageIcon icon = new javax.swing.ImageIcon(getClass().getResource("/inventariox/genia/vista/pill.png"));
-    JFrame frame = new JFrame();
-    frame.setIconImage(icon.getImage());
-    JOptionPane.showMessageDialog(frame, errTxt, "Error", JOptionPane.ERROR_MESSAGE);
+    raiseWarning(errTxt,"Error",icon,JOptionPane.ERROR_MESSAGE);
+    
+  }
+  public void ventanaExito(String txt){
+      ImageIcon icon = new javax.swing.ImageIcon(getClass().getResource("/inventariox/genia/vista/pill.png"));
+      raiseWarning(txt,"Exito",icon,JOptionPane.YES_OPTION);
   }
 
   public boolean verificarEstado(int indiceMed) {
@@ -148,13 +156,6 @@ public class Controladora {
     }
     dest.setText(txt + "\nCosto Total: " + Utility.getSolo2Decimales(costoTotal));
   }
-  /*
-   * 
-   * for (String i: listaMed.getNombreMedicAsArray()){
-   * System.out.println(i);
-   * }
-   */
-
 
 
   public void mostrarLbls(JLabel[] labels) {
@@ -194,6 +195,7 @@ public class Controladora {
   }
   public void ocultarOpcMedRefri(JLabel[] lbls, JTextField[] txts, JRadioButton radB) {
       radB.setVisible(false);
+      radB.setSelected(false);
       ocultarLbls(lbls);
       ocultarTxts(txts);
   }
@@ -207,6 +209,7 @@ public class Controladora {
   public void ocultarOpcMedNoRefri(JLabel lbl, JTextField txtArea, JLabel lbl2) {
     lbl.setVisible(false);
     txtArea.setVisible(false);
+    txtArea.setText(null);
     lbl2.setVisible(false);
   }
 
@@ -232,6 +235,12 @@ public class Controladora {
       tBtn.setVisible(false);
       radB.setVisible(false);
 
+  }
+  public void mostrarTipoMedRefri(JLabel[] lbls, JTextField[] txts,JRadioButton radB){
+      mostrarLbls(lbls);
+      mostrarTxts(txts);
+      radB.setVisible(true);
+      
   }
   public void ocultarOferta(JTextField txtArea, JLabel txt) {
     txtArea.setVisible(false);
@@ -283,6 +292,95 @@ public class Controladora {
 
   }
 
+  
+  public void setIcon(JLabel lbl, String iconName, String txt){
+      lbl.setVisible(true);
+      lbl.setToolTipText(txt); lbl.setIcon(new javax.swing.ImageIcon(getClass().getResource(iconName)));
+  }
+  public void raiseIcon(JLabel lbl, String txt, boolean bueno){
+      if (bueno)
+          setIcon(lbl,"/inventariox/genia/vista/cheque.png",":Ds");
+      else
+          setIcon(lbl,"/inventariox/genia/vista/advertencia.png",txt);
+  }
+  public boolean validarCodigoMed(String cod, JLabel lbl){
+      boolean m = Utility.validarCodigo(cod);
+      raiseIcon(lbl, "El codigo debe comenzar con 2 letras mayusculas seguidas de 8 digitos!",m);
+      return Utility.validarCodigo(cod);
+          
+  }
+  
+  public boolean validarNombre(String nom,JLabel lbl) {raiseIcon(lbl,"El nombre no puede estar vacio!",!(nom.isEmpty())); return !nom.isEmpty();}
+  
+  public boolean validarFecha(String fecha, JLabel lbl){
+      if (!Utility.validarFechaVencimiento(fecha)){
+          raiseIcon(lbl, "Fecha con formato invalida! (MM/AAAA) donde M=mes y A=año",false);
+          return false;}
+      else if (!(Utility.getAnioActual()<=Utility.getAnioVencimiento(fecha))){
+          raiseIcon(lbl, "Producto ya caducado",false);
+          return false;}
+      boolean m = Utility.getMesActual()<Utility.getMesVencimiento(fecha);
+      raiseIcon(lbl,"Producto ya caducado",m);      
+      return m;
+  }
+  public boolean validarNatural(String dato, JLabel lbl){
+      boolean m = Utility.validarEntero(dato);
+      raiseIcon(lbl, "Error ingresa un numero valido!(Positivo, max 8 cifras)",m);
+      return Utility.validarNatural(dato);
+  }
+
+  
+  public boolean validarOferta(String dato, JLabel lbl){
+      boolean m = Utility.validarDouble(dato);
+      raiseIcon(lbl,"Error Ingresa un numero valido!(de 1 a 5 enteros y de 1 a 3 decimales)!",m);
+      return m;
+  }
+  public boolean validarNoAlma(String txt,JLabel lbl){
+      boolean m = Utility.validarAlmacenamiento(txt);
+      raiseIcon(lbl,"Error, Debes indicar almenos 3 lugares distintos y separarlos por comas!",m);
+      return m;
+  }
+  public boolean validarTemp(String tempMax, String tempMin, JLabel lbl){
+      boolean m = Utility.validarDouble(tempMax);
+      boolean c = Utility.validarDouble(tempMin);
+      if(!m || !c){
+          raiseIcon(lbl,"Error Ingresa un numero valido!(de 1 a 5 enteros y de 1 a 3 decimales)!",!(!m || !c));
+          return m;
+      }
+      
+      m = (int) Math.round(Double.parseDouble(tempMax)) > (int) Math.round(Double.parseDouble(tempMin));
+          raiseIcon(lbl,"Temperatura minima y maxima incompatibles",m);
+          return m;
+      
+  }
+  public boolean validarHoras(String dato, JLabel lbl){
+      boolean m = Utility.validarDoublePositivo(dato);
+      raiseIcon(lbl, "Error, la hora no puede ser negativa y debe ser un numero natural o deminal",m);
+      return m;
+      
+  }
+  public boolean validarCosto(String dato, JLabel lbl){
+      boolean m = Utility.validarDoublePositivo(dato);
+      raiseIcon(lbl, "Error, El costo no puede ser negativo y debe ser un numero natural o deminal",m);
+      return m;
+  }
+  public void ocultarIcon(JLabel []icons){
+      ocultarLbls(icons);
+  }
+  public void limpiar(JTextField [] txt, JComboBox vigencia,JComboBox tipoMed, JRadioButton cert){
+      for(JTextField t : txt)
+          t.setText(null);
+      vigencia.setSelectedIndex(0);
+      tipoMed.setSelectedIndex(0);
+      cert.setSelected(false);
+  }
+  public void limpiar(JTextField [] txt, JComboBox vigencia, JRadioButton cert){
+      for(JTextField t : txt)
+          t.setText(null);
+      vigencia.setSelectedIndex(0);
+      cert.setSelected(false);
+  }
+
   public int buscarVentaPorNombre(String nombre) {
     for (int i = 0; i < listaVenta.size(); i++) {
       if (listaVenta.get(i).getNombreProducto().equals(nombre))
@@ -314,5 +412,62 @@ public class Controladora {
     return lista.getIndice(index).estaVigente();
   }
   public boolean medNecesitaRefrigeracion(int index){return lista.getIndice(index) instanceof MedicamentoRefrigerado;}
+
+  public void ocultarOpcTipoMed(JLabel[] lbls, JTextField[] txts, JRadioButton rButton) {
+    ocultarLbls(lbls);
+    ocultarTxts(txts);
+    rButton.setVisible(false);
+  }
+  public boolean agregarMed(String cod, String nom, String vence, String costo, String unidDispo, Boolean hayOferta, String oferta, int vigencia, int tipoMed, Boolean certCadFrio, String tempMax, String tempMin, String horasNoRefri, String tiempAbrir, String noAlma){
+      if (!Utility.validarCodigo(cod) | !Utility.validarFechaVencimiento(vence)|!Utility.validarEntero(unidDispo)| vigencia ==0| !Utility.validarDoublePositivo(costo)){
+          ventanaError("Uno o mas valores no son validos1!");
+          return false;
+      } 
+      if (hayOferta && !Utility.validarDouble(oferta)){
+           ventanaError("Oferta seleccionada, pero ningun valor introducido!");
+           return false;
+       }
+       switch(tipoMed){
+           case 0 -> ventanaError("No se selecciono el tipo de Medicamento!");
+           case 1 -> {
+               if(!Utility.validarDouble(tempMax) || !Utility.validarDouble(tempMin)){
+                    ventanaError("Uno o mas valores no son validos!3");
+                    return false;
+                }
+
+                if ((int) Math.round(Double.parseDouble(tempMax)) < (int) Math.round(Double.parseDouble(tempMin))){
+                    ventanaError("La temperatura maxima y la temperatura minima son incompatibles!");
+                    return false;
+                }
+               if (!Utility.validarDouble(horasNoRefri) | !Utility.validarDouble(tiempAbrir)){
+                   ventanaError("Uno o mas valores no son validos!4");
+                    return false;
+                   
+               }
+               /*
+               new MedicamentoRefrigerado("QR66778899", 4, 10, 12353, 0, 18.75, "Epinefrina", "04/2025", true,
+        2.0, 8.0, 10.0, 6.0));
+               */
+               lista.aggUltimo(new MedicamentoRefrigerado(cod,0,Integer.parseInt(unidDispo),0,vigencia,
+                       Double.parseDouble(costo),nom,vence,certCadFrio,Double.parseDouble(tempMin),
+                       Double.parseDouble(tempMax),Double.parseDouble(tiempAbrir),
+                       Double.parseDouble(horasNoRefri)));
+               
+          }
+           case 2 -> {
+               if(!Utility.validarAlmacenamiento(noAlma)){
+                   ventanaError("Los lugares de no almacenamiento son invalidos2!");
+                   return false;
+               }
+               lista.aggUltimo(new MedicamentoAmbiente(cod,0,Integer.parseInt(unidDispo),0,vigencia,
+                       Double.parseDouble(costo),nom,vence, Utility.getLugares(noAlma)));
+                   
+          }
+       }
+       if (hayOferta)
+           lista.getUltimo().colocarOferta(Double.parseDouble(oferta));
+       ventanaExito("Medicamento Agregado!");
+       return true;
+   }
 
 }

@@ -21,12 +21,16 @@ public class InventarioXGenIA {
   public static void main(String[] args) {
     ListaMedicamentos listaMed = new ListaMedicamentos();
 
-    ArrayList<Venta> listaVenta = new ArrayList<>();
-    listaMed.aggUltimo(new Medicamento("AB12345678", 10, 50, 12345, 1, 25.99, "Paracetamol", "12/2024"));
-    listaMed.aggUltimo(new Medicamento("CD87654321", 20, 60, 12346, 0, 15.50, "Ibuprofeno", "11/2023"));
-    listaMed.aggUltimo(new Medicamento("EF11223344", 5, 30, 12347, 2, 45.75, "Amoxicilina", "05/2025"));
-    listaMed.aggUltimo(new Medicamento("GH55667788", 12, 40, 12348, 1, 10.25, "Aspirina", "08/2024"));
-    listaMed.aggUltimo(new Medicamento("IJ99887766", 18, 70, 12349, 0, 35.00, "Loratadina", "02/2026"));
+    listaMed.aggUltimo(new MedicamentoAmbiente("AB12345678", 10, 50, 12345, 1, 25.99, "Paracetamol", "12/2024",
+        new String[] { "Luz directa del sol", "Alta humedad", "Temperaturas extremas" }));
+    listaMed.aggUltimo(new MedicamentoAmbiente("CD87654321", 20, 60, 12346, 0, 15.50, "Ibuprofeno", "11/2023",
+        new String[] { "Cerca de radiadores", "En baños", "Cerca de ventanas" }));
+    listaMed.aggUltimo(new MedicamentoRefrigerado("EF11223344", 5, 30, 12347, 2, 45.75, "Amoxicilina", "05/2025", true,
+        2.0, 8.0, 24.0, 12.0));
+    listaMed.aggUltimo(new MedicamentoRefrigerado("GH55667788", 12, 40, 12348, 1, 10.25, "Aspirina", "08/2024", true,
+        2.0, 8.0, 24.0, 12.0));
+    listaMed.aggUltimo(new MedicamentoAmbiente("IJ99887766", 18, 70, 12349, 0, 35.00, "Loratadina", "02/2026",
+        new String[] { "Luz directa del sol", "Alta humedad", "Temperaturas extremas" }));
     listaMed.aggUltimo(new MedicamentoAmbiente("KL33445566", 8, 50, 12350, 1, 20.00, "Cetirizina", "09/2023",
         new String[] { "Luz directa del sol", "Alta humedad", "Temperaturas extremas" }));
     listaMed.aggUltimo(new MedicamentoAmbiente("MN44556677", 6, 40, 12351, 2, 22.50, "Metformina", "03/2024",
@@ -37,11 +41,17 @@ public class InventarioXGenIA {
         2.0, 8.0, 10.0, 6.0));
     listaMed.aggUltimo(new MedicamentoRefrigerado("ST77889900", 7, 30, 12354, 2, 30.50, "Hormona de crecimiento humana",
         "11/2024", true, 2.0, 8.0, 36.0, 18.0));
-    listaMed.aggUltimo(new Medicamento("UV12345678", 15, 25, 12355, 1, 50.00, "Testosterona", "07/2025"));
-    listaMed.aggUltimo(new Medicamento("WX87654321", 10, 20, 12356, 2, 45.00, "Nandrolona", "03/2024"));
-    listaMed.aggUltimo(new Medicamento("YZ11223344", 5, 15, 12357, 0, 55.75, "Oxandrolona", "10/2026"));
-    listaMed.aggUltimo(new Medicamento("AB99887766", 8, 18, 12358, 1, 60.00, "Estanozolol", "12/2025"));
-    listaMed.aggUltimo(new Medicamento("CD33445566", 12, 22, 12359, 2, 48.50, "Trembolona", "05/2024"));
+    listaMed.aggUltimo(new MedicamentoAmbiente("UV12345678", 15, 25, 12355, 1, 50.00, "Testosterona", "07/2025",
+        new String[] { "Luz directa del sol", "Alta humedad", "Temperaturas extremas" }));
+    listaMed.aggUltimo(new MedicamentoAmbiente("WX87654321", 10, 20, 12356, 2, 45.00, "Nandrolona", "03/2024",
+        new String[] { "Cerca de radiadores", "En baños", "Cerca de ventanas" }));
+    listaMed.aggUltimo(new MedicamentoRefrigerado("YZ11223344", 5, 15, 12357, 0, 55.75, "Oxandrolona", "10/2026", true,
+        2.0, 8.0, 24.0, 12.0));
+    listaMed.aggUltimo(new MedicamentoRefrigerado("AB99887766", 8, 18, 12358, 1, 60.00, "Estanozolol", "12/2025", true,
+        2.0, 8.0, 24.0, 12.0));
+    listaMed.aggUltimo(new MedicamentoAmbiente("CD33445566", 12, 22, 12359, 2, 48.50, "Trembolona", "05/2024",
+        new String[] { "Cerca de radiadores", "En baños", "Cerca de ventanas" }));
+
     /*
      * Runnable mRun = () ->{
      * PantallaCarga pCarga= new PantallaCarga();

@@ -84,6 +84,7 @@ public class PantallaCliente extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(255, 204, 204));
         setIconImage(new javax.swing.ImageIcon(getClass().getResource("/inventariox/genia/vista/pill.png")).getImage());
+        setResizable(false);
 
         jPanel2.setBackground(new java.awt.Color(153, 204, 255));
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(""));

@@ -1222,7 +1222,7 @@ public class PantallaEmpleado extends javax.swing.JFrame {
     // TODO add your handling code here:
     if (!c.agregarMed(tabPanelAgTxtCod.getText(), tabPanelAgTxtNomb.getText(), tabPanelAgTxtFechaVence.getText(),
         tabPanelAgTxtCostoCompra.getText(),
-        tabPanelAgTxtUnidDispo.getText(), tabPanelAgTxtLote.getText(), tabPanelAgTogBtnAggOfer.isSelected(),
+        tabPanelAgTxtLote.getText() , tabPanelAgTxtUnidDispo.getText(), tabPanelAgTogBtnAggOfer.isSelected(),
         tabPanelAgTxtOfer.getText(), tabPanelAgCmbVig.getSelectedIndex(), tabPanelAgCmbTipMed.getSelectedIndex(),
         tabPanelAgRadBtnCadeFrio.isSelected(), tabPanelAgTxtTempMax.getText(), tabPanelAgTxtTempMin.getText(),
         tabPanelAgTxtTiemNoRefri.getText(), tabPanelAgTxtTiemAbr.getText(), tabPanelAgTxtNoAlma.getText()))
